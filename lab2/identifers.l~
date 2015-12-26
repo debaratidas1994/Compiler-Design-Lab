@@ -1,0 +1,26 @@
+%{
+	/*
+		Lex program to identify and count identifiers and keywords.
+	*/
+	int idc = 0, kwc = 0;
+%}
+letter [a-zA-Z]+
+digit [0-9]+
+keywords if|else|while|for|int|float
+identifier {letter}[{letter}|{digit}]*
+%%
+{keywords} {
+	kwc+=1;
+	printf("%s - kw\n",yytext);
+}
+{identifier} {
+	idc+=1;
+	printf("%s - id\n",yytext);
+}
+[ \n]+
+%%
+int main(){
+	yylex();
+	printf("\nkw count: %d\nid count: %d\n",kwc,idc);
+	return 0;
+}

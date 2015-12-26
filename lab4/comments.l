@@ -1,0 +1,14 @@
+%{
+	int cc = 0;
+%}
+[\t][/][/][A-Za-z0-9/*? ]*[\n] cc+=1;
+[\t][/][*][A-Za-z0-9/*?\n\t ]*[*][/][\n] cc+=1;
+%%
+int main(){
+	yyin = fopen("input.txt","r");
+	yyout = fopen("output.txt","w");
+	yylex();
+	fprintf("no. of comments: %d\n",cc);
+	fclose(yyout);
+	return 0;
+}

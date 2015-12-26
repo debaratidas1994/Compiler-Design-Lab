@@ -1,0 +1,28 @@
+%{
+	#include<stdio.h>
+	int cc=0,wc=0,sc=0,isSpace=0;
+%}
+%%
+[a-zA-Z0-9.,] {
+	cc+=1;
+	isSpace=0;
+}
+[ ] {
+	sc+=1;
+	isSpace=1;
+	if(cc!=0){
+		wc+=1;
+	}
+	cc+=1;		
+}
+%%
+int main(void){
+	yylex();
+	if(!isSpace){
+		wc+=1;
+	}
+	printf("number of ch count: %d\n",cc);
+	printf("number of word count: %d\n",wc);
+	printf("number of space count: %d\n",sc);
+	return 0;
+}
